@@ -1,67 +1,33 @@
 const router = require('express').Router();
 // Include the Book model with the other imports
-const { Reader, Book, LibraryCard } = require('../../models');
+const { Traveler, Location, Trip } = require('../../models');
 
-// GET all readers
+// GET all trips
 router.get('/', async (req, res) => {
   try {
-    const readerData = await Reader.findAll({
-      // Add Book as a second model to JOIN with
-      include: [{ model: LibraryCard }, { model: Book }],
-    });
-    res.status(200).json(readerData);
-  } catch (err) {
-    res.status(500).json(err);
-  }
+    res.status(200).json(locationData);
+  } catch (err) { };
 });
 
-// GET a single reader
+// GET one trip
 router.get('/:id', async (req, res) => {
   try {
-    const readerData = await Reader.findByPk(req.params.id, {
-      // Add Book as a second model to JOIN with
-      include: [{ model: LibraryCard }, { model: Book }],
-    });
-
-    if (!readerData) {
-      res.status(404).json({ message: 'No reader found with that id!' });
-      return;
-    }
-
-    res.status(200).json(readerData);
-  } catch (err) {
-    res.status(500).json(err);
-  }
+    res.status(200).json(locationData);
+  } catch (err) { };
 });
 
-// CREATE a reader
-router.post('/', async (req, res) => {
+// POST one trip
+router.post('/:id', async (req, res) => {
   try {
-    const readerData = await Reader.create(req.body);
-    res.status(200).json(readerData);
-  } catch (err) {
-    res.status(400).json(err);
-  }
+    res.status(200).json(locationData);
+  } catch (err) { };
 });
 
-// DELETE a reader
+// DELETE one trip
 router.delete('/:id', async (req, res) => {
   try {
-    const readerData = await Reader.destroy({
-      where: {
-        id: req.params.id,
-      },
-    });
-
-    if (!readerData) {
-      res.status(404).json({ message: 'No reader found with that id!' });
-      return;
-    }
-
-    res.status(200).json(readerData);
-  } catch (err) {
-    res.status(500).json(err);
-  }
+    res.status(200).json(locationData);
+  } catch (err) { };
 });
 
 module.exports = router;
