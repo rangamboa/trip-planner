@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS agency_db;
+CREATE DATABASE agency_db;
